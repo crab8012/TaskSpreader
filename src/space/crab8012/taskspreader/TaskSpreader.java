@@ -16,7 +16,7 @@ public class TaskSpreader {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        MainFrame.main(args);
+        StartPage.main();
     }
     
 }

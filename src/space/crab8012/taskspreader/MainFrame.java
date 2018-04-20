@@ -37,7 +37,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         taskListScroller = new javax.swing.JScrollPane();
-        taskList = new javax.swing.JList<>();
+        taskList = new javax.swing.JList<String>();
         btnEditTask = new javax.swing.JButton();
         btnDeleteTask = new javax.swing.JButton();
         TaskLabel = new javax.swing.JLabel();
@@ -72,6 +72,11 @@ public class MainFrame extends javax.swing.JFrame {
         TaskLabel.setText("Task:");
 
         taskEntry.setToolTipText("Type a brief description of the task");
+        taskEntry.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                taskEntryKeyPressed(evt);
+            }
+        });
 
         labelImportance.setText("Importance");
 
@@ -106,11 +111,12 @@ public class MainFrame extends javax.swing.JFrame {
         importanceSlider.setPaintTicks(true);
         importanceSlider.setSnapToTicks(true);
         importanceSlider.setToolTipText("The importance of the task from 0 to 5");
+        importanceSlider.setValue(1);
 
         timeSpinner.setValue(1);
 
         btnResetProject.setBackground(new java.awt.Color(255, 0, 0));
-        btnResetProject.setText("Reset Project");
+        btnResetProject.setText("Close Project");
         btnResetProject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnResetProjectActionPerformed(evt);
@@ -246,10 +252,17 @@ public class MainFrame extends javax.swing.JFrame {
         listImportance.clear();
         listPercentage.clear();
         listTime.clear();
+        
+        super.dispose();
+        StartPage.main();
 
         //Set the focus to the textbox so that we can start typing immediately
-        taskEntry.requestFocus();
+        //taskEntry.requestFocus();
     }//GEN-LAST:event_btnResetProjectActionPerformed
+
+    private void taskEntryKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_taskEntryKeyPressed
+        
+    }//GEN-LAST:event_taskEntryKeyPressed
 
     private void calculate(int time){
         System.out.println("CALCULATING FOR: " + time + " Minutes");
@@ -275,7 +288,7 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void newProject() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -305,6 +318,10 @@ public class MainFrame extends javax.swing.JFrame {
                 new MainFrame().setVisible(true);
             }
         });
+    }
+    
+    public static void openProject(){
+        //ToDo: Parse data from a CSV to fill in the forms
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel TaskLabel;
